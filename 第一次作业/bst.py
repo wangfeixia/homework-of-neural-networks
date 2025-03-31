@@ -5,7 +5,6 @@ import seaborn as sns
 import torch
 import torch.nn as nn
 import torch.utils.data as Data
-import openpyxl
 from sklearn.decomposition import PCA
 from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
 from sklearn.model_selection import train_test_split
@@ -13,8 +12,8 @@ from sklearn.preprocessing import StandardScaler
 
 # 数据处理（包括相关性分析与PCA分析）
 def load_and_analyze_data(test_size=0.1, random_state=42, use_pca=False, n_components=None):
-   # data = pd.read_csv('BostonHousingData.csv')
-    data = pd.read_excel("BostonHousingData.xlsx")
+    data = pd.read_csv('BostonHousingData.csv')
+   # data = pd.read_excel("BostonHousingData.xlsx")
     # 相关性分析
     plt.figure(figsize=(12, 10))
     corr_matrix = data.corr()
@@ -105,7 +104,7 @@ class Model(nn.Module):
             nn.Linear(input_dim, 128),
             nn.BatchNorm1d(128),
             nn.ReLU(),
-            nn.Dropout(0.03),
+            nn.Dropout(0.05),
 
             nn.Linear(128, 64),
             nn.BatchNorm1d(64),
